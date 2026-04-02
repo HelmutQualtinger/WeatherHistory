@@ -4,7 +4,7 @@ Historische Wetterdaten abrufen und interaktiv visualisieren – powered by [Ope
 
 ## Überblick
 
-Dieses Projekt lädt stündliche Wetterdaten der Open-Meteo Archiv-API für beliebige Standorte herunter, aggregiert sie zu Tageswerten und stellt sie in einem interaktiven Web-Dashboard dar. Aktuell konfiguriert für **Wien**, **Casablanca**, **Medina**, **Rom** und **Lissabon**.
+Dieses Projekt lädt stündliche Wetterdaten der Open-Meteo Archiv-API für beliebige Standorte herunter, aggregiert sie zu Tageswerten und stellt sie in einem interaktiven Web-Dashboard dar. Aktuell konfiguriert für **Wien**, **Casablanca**, **Medina**, **Rom**, **Lissabon**, **Santiago de Chile**, **Los Angeles** und **Oslo**.
 
 ## Voraussetzungen
 
@@ -25,6 +25,9 @@ python3 WeatherHistoryCasablanca.py
 python3 WeatherHistoryMedina.py
 python3 WeatherHistoryRome.py
 python3 WeatherHistoryLisbon.py
+python3 WeatherHistorySantiago.py
+python3 WeatherHistoryLosAngeles.py
+python3 WeatherHistoryOslo.py
 ```
 
 Erzeugt jeweils eine CSV-Datei mit täglichen Min/Max/Durchschnittswerten für Strahlung, Temperatur, Luftfeuchtigkeit, Luftdruck, Bewölkung und Niederschlag.
@@ -81,11 +84,14 @@ weather_fetch.py          # Library: Datenabruf via Open-Meteo API
 weather_dash_lib.py       # Library: Datenaggregation (load_data)
 StrahlungDashAlle.py      # Kombiniertes Dashboard (Port 8055)
 assets/theme.css          # CSS für Light/Dark-Theme
-WeatherHistoryWien.py     # Wien: Datenabruf (48.2°N, 16.4°E)
-WeatherHistoryCasablanca.py
-WeatherHistoryMedina.py
-WeatherHistoryRome.py
-WeatherHistoryLisbon.py
+WeatherHistoryWien.py        # Wien (48.2°N, 16.4°E)
+WeatherHistoryCasablanca.py  # Casablanca (33.6°N, 7.6°W)
+WeatherHistoryMedina.py      # Medina (24.5°N, 39.6°E)
+WeatherHistoryRome.py        # Rom (41.9°N, 12.5°E)
+WeatherHistoryLisbon.py      # Lissabon (38.7°N, 9.1°W)
+WeatherHistorySantiago.py    # Santiago de Chile (33.4°S, 70.7°W)
+WeatherHistoryLosAngeles.py  # Los Angeles (34.1°N, 118.2°W)
+WeatherHistoryOslo.py        # Oslo (59.9°N, 10.8°E)
 ```
 
 ## Datenquelle

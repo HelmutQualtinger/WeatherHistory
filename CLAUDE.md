@@ -11,6 +11,9 @@ python3 WeatherHistoryCasablanca.py
 python3 WeatherHistoryMedina.py
 python3 WeatherHistoryRome.py
 python3 WeatherHistoryLisbon.py
+python3 WeatherHistorySantiago.py
+python3 WeatherHistoryLosAngeles.py
+python3 WeatherHistoryOslo.py
 
 # Start the combined dashboard
 python3 StrahlungDashAlle.py        # http://localhost:8055
