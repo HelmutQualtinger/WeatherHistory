@@ -1,0 +1,13 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+casablanca_wetter_vollständig_03_2026.csv
+medina_wetter_vollständig_03_2026.csv
+wien_wetter_vollständig_03_2026.csv
