@@ -6,4 +6,5 @@ if __name__ == "__main__":
         longitude=39.5692,
         timezone="Asia/Riyadh",
         filename="medina_wetter_vollständig_03_2026.csv",
+        start_date="1980-01-01",
     )

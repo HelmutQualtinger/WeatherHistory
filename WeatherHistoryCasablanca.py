@@ -6,4 +6,5 @@ if __name__ == "__main__":
         longitude=-7.5898,
         timezone="Africa/Casablanca",
         filename="casablanca_wetter_vollständig_03_2026.csv",
+        start_date="1980-01-01",
     )

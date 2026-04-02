@@ -4,7 +4,7 @@ Historische Wetterdaten abrufen und interaktiv visualisieren – powered by [Ope
 
 ## Überblick
 
-Dieses Projekt lädt stündliche Wetterdaten der Open-Meteo Archiv-API für beliebige Standorte herunter, aggregiert sie zu Tageswerten und stellt sie in interaktiven Web-Dashboards dar. Aktuell konfiguriert für **Wien**, **Casablanca** und **Medina**.
+Dieses Projekt lädt stündliche Wetterdaten der Open-Meteo Archiv-API für beliebige Standorte herunter, aggregiert sie zu Tageswerten und stellt sie in interaktiven Web-Dashboards dar. Aktuell konfiguriert für **Wien**, **Casablanca**, **Medina**, **Rom** und **Lissabon**.
 
 ## Voraussetzungen
 
@@ -23,6 +23,8 @@ pip install requests dash plotly pandas
 python3 WeatherHistoryWien.py
 python3 WeatherHistoryCasablanca.py
 python3 WeatherHistoryMedina.py
+python3 WeatherHistoryRome.py
+python3 WeatherHistoryLisbon.py
 ```
 
 Erzeugt jeweils eine CSV-Datei mit täglichen Min/Max/Durchschnittswerten für Strahlung, Temperatur, Luftfeuchtigkeit, Luftdruck, Bewölkung und Niederschlag.
@@ -33,9 +35,11 @@ Erzeugt jeweils eine CSV-Datei mit täglichen Min/Max/Durchschnittswerten für S
 python3 StrahlungDashWien.py        # http://localhost:8050
 python3 StrahlungDashCasablanca.py  # http://localhost:8051
 python3 StrahlungDashMedina.py      # http://localhost:8052
+python3 StrahlungDashRome.py        # http://localhost:8053
+python3 StrahlungDashLisbon.py      # http://localhost:8054
 ```
 
-Alle drei Dashboards können gleichzeitig laufen.
+Alle Dashboards können gleichzeitig laufen.
 
 ## Screenshot
 
@@ -103,12 +107,16 @@ if __name__ == "__main__":
 ```text
 weather_fetch.py          # Library: Datenabruf via Open-Meteo API
 weather_dash_lib.py       # Library: Dash-App-Factory mit allen Tabs & Callbacks
-WeatherHistoryWien.py     # Wien: Datenabruf (48.2°N, 16.4°E)
-WeatherHistoryCasablanca.py
-WeatherHistoryMedina.py
-StrahlungDashWien.py      # Wien: Dashboard (Port 8050)
-StrahlungDashCasablanca.py
-StrahlungDashMedina.py
+WeatherHistoryWien.py       # Wien: Datenabruf (48.2°N, 16.4°E)
+WeatherHistoryCasablanca.py # Casablanca (33.6°N, 7.6°W)
+WeatherHistoryMedina.py     # Medina (24.5°N, 39.6°E)
+WeatherHistoryRome.py       # Rom (41.9°N, 12.5°E)
+WeatherHistoryLisbon.py     # Lissabon (38.7°N, 9.1°W)
+StrahlungDashWien.py        # Wien: Dashboard (Port 8050)
+StrahlungDashCasablanca.py  # Casablanca (Port 8051)
+StrahlungDashMedina.py      # Medina (Port 8052)
+StrahlungDashRome.py        # Rom (Port 8053)
+StrahlungDashLisbon.py      # Lissabon (Port 8054)
 ```
 
 ## Datenquelle

@@ -1,0 +1,82 @@
+/* ── Dark mode: applied when <body class="dark-mode"> ── */
+
+body.dark-mode {
+    background-color: #151823;
+    color: #e0e0e0;
+}
+
+/* Tabs */
+body.dark-mode .tab,
+body.dark-mode .tab--selected {
+    background-color: #1e2130 !important;
+    color: #e0e0e0 !important;
+    border-color: #2e3347 !important;
+}
+body.dark-mode .tab--selected {
+    background-color: #2a2f45 !important;
+    border-top: 2px solid #5b9bd5 !important;
+}
+body.dark-mode .tab:hover {
+    background-color: #2a2f45 !important;
+}
+body.dark-mode .tab-container,
+body.dark-mode .tabs-container {
+    border-color: #2e3347 !important;
+}
+
+/* Dropdown – outer wrapper */
+body.dark-mode .Select-control,
+body.dark-mode .dash-dropdown .Select-control {
+    background-color: #1e2130 !important;
+    border-color: #3a3f55 !important;
+}
+
+/* Dropdown – selected value text */
+body.dark-mode .Select-value-label,
+body.dark-mode .Select--single > .Select-control .Select-value,
+body.dark-mode .Select-placeholder {
+    color: #e0e0e0 !important;
+}
+
+/* Dropdown arrow */
+body.dark-mode .Select-arrow {
+    border-top-color: #e0e0e0 !important;
+}
+
+/* Dropdown menu */
+body.dark-mode .Select-menu-outer {
+    background-color: #1e2130 !important;
+    border-color: #3a3f55 !important;
+}
+body.dark-mode .Select-option {
+    background-color: #1e2130 !important;
+    color: #e0e0e0 !important;
+}
+body.dark-mode .Select-option:hover,
+body.dark-mode .Select-option.is-focused {
+    background-color: #2a2f45 !important;
+    color: #ffffff !important;
+}
+body.dark-mode .Select-option.is-selected {
+    background-color: #344060 !important;
+    color: #ffffff !important;
+}
+
+/* Input inside dropdown */
+body.dark-mode .Select-input > input {
+    color: #e0e0e0 !important;
+}
+body.dark-mode .Select-noresults {
+    color: #aaaaaa !important;
+    background-color: #1e2130 !important;
+}
+
+/* Scrollbar (WebKit) */
+body.dark-mode ::-webkit-scrollbar {
+    width: 8px;
+    background-color: #1e2130;
+}
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background-color: #3a3f55;
+    border-radius: 4px;
+}

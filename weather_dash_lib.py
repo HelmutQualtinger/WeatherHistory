@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import dash
 from dash import dcc, html, Input, Output
@@ -38,6 +39,12 @@ def load_data(filename):
     precip_mittel = precip_monatlich.groupby("Monat")["Niederschlag_Tag"].mean().reset_index()
     precip_mittel["MonatName"] = precip_mittel["Monat"].map(MONATSNAMEN)
 
+    # Jährliche Zeitreihen (nur vollständige Jahre)
+    temp_jaehrlich = (df.groupby("Jahr")["Temp_Avg"].mean().reset_index()
+                      .rename(columns={"Temp_Avg": "Temp_Jahr"}))
+    precip_jaehrlich = (precip_monatlich.groupby("Jahr")["Niederschlag_Tag"].sum().reset_index()
+                        .rename(columns={"Niederschlag_Tag": "Precip_Jahr"}))
+
     return dict(
         df=df,
         monthly=monthly,
@@ -47,6 +54,8 @@ def load_data(filename):
         temp_mittel=temp_mittel,
         precip_monatlich=precip_monatlich,
         precip_mittel=precip_mittel,
+        temp_jaehrlich=temp_jaehrlich,
+        precip_jaehrlich=precip_jaehrlich,
         alle_jahre=sorted(df["Jahr"].unique()),
     )
 
@@ -75,6 +84,8 @@ def create_app(cfg):
     temp_mittel = data["temp_mittel"]
     precip_monatlich = data["precip_monatlich"]
     precip_mittel = data["precip_mittel"]
+    temp_jaehrlich = data["temp_jaehrlich"]
+    precip_jaehrlich = data["precip_jaehrlich"]
     alle_jahre = data["alle_jahre"]
 
     jaehrlich_voll = jaehrlich[jaehrlich["Jahr"] < 2026]
@@ -101,6 +112,8 @@ def create_app(cfg):
                 dcc.Tab(label="Strahlung Jahressummen",  value="jahressummen"),
                 dcc.Tab(label="Temperaturen",            value="temperaturen"),
                 dcc.Tab(label="Niederschlag",            value="niederschlag"),
+                dcc.Tab(label="Temp. Jahrestrend",       value="temp_trend"),
+                dcc.Tab(label="Niederschlag Jahrestrend", value="precip_trend"),
             ]),
             html.Div(id="tab-inhalt", style={"marginTop": "20px"}),
         ]
@@ -182,6 +195,65 @@ def create_app(cfg):
                              value="alle", clearable=False, style={"width": "200px"}),
                 dcc.Graph(id="precip-graph", style={"height": "500px"}),
             ])
+
+        elif tab == "temp_trend":
+            d = temp_jaehrlich[temp_jaehrlich["Jahr"] < 2026]
+            jahre = d["Jahr"].values
+            werte = d["Temp_Jahr"].values
+            m, b = np.polyfit(jahre, werte, 1)
+            trend_dekade = m * 10
+            fit_y = m * jahre + b
+            richtung = "▲" if trend_dekade > 0 else "▼"
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(
+                x=jahre, y=werte.round(2), mode="lines+markers",
+                name="Jahresmittel", line=dict(color=cfg["bar_voll_color"], width=2),
+                marker=dict(size=6),
+                hovertemplate="%{x}: %{y:.2f} °C<extra></extra>"))
+            fig.add_trace(go.Scatter(
+                x=jahre, y=fit_y.round(3), mode="lines",
+                name=f"Linearer Trend ({trend_dekade:+.3f} °C/Dekade)",
+                line=dict(color="#c0392b", width=2, dash="dash")))
+            fig.add_annotation(
+                x=0.02, y=0.95, xref="paper", yref="paper", showarrow=False,
+                text=f"{richtung} <b>{abs(trend_dekade):.3f} °C pro Dekade</b>",
+                font=dict(size=14, color="#c0392b"),
+                bgcolor="rgba(255,255,255,0.85)", borderpad=8)
+            fig.update_layout(
+                title=f"Jährliche Durchschnittstemperatur – {city}",
+                xaxis_title="Jahr", yaxis_title="°C", plot_bgcolor="white",
+                yaxis=dict(gridcolor="#eeeeee"), xaxis=dict(dtick=5),
+                legend=dict(orientation="h", y=1.05))
+            return dcc.Graph(figure=fig, style={"height": "520px"})
+
+        elif tab == "precip_trend":
+            d = precip_jaehrlich[precip_jaehrlich["Jahr"] < 2026]
+            jahre = d["Jahr"].values
+            werte = d["Precip_Jahr"].values
+            m, b = np.polyfit(jahre, werte, 1)
+            trend_dekade = m * 10
+            fit_y = m * jahre + b
+            richtung = "▲" if trend_dekade > 0 else "▼"
+            fig = go.Figure()
+            fig.add_trace(go.Bar(
+                x=jahre, y=werte.round(1),
+                name="Jahresniederschlag", marker_color=cfg["precip_color"],
+                hovertemplate="%{x}: %{y:.0f} mm<extra></extra>"))
+            fig.add_trace(go.Scatter(
+                x=jahre, y=fit_y.round(1), mode="lines",
+                name=f"Linearer Trend ({trend_dekade:+.1f} mm/Dekade)",
+                line=dict(color="#c0392b", width=2, dash="dash")))
+            fig.add_annotation(
+                x=0.02, y=0.95, xref="paper", yref="paper", showarrow=False,
+                text=f"{richtung} <b>{abs(trend_dekade):.1f} mm pro Dekade</b>",
+                font=dict(size=14, color="#c0392b"),
+                bgcolor="rgba(255,255,255,0.85)", borderpad=8)
+            fig.update_layout(
+                title=f"Jährlicher Gesamtniederschlag – {city}",
+                xaxis_title="Jahr", yaxis_title="mm", plot_bgcolor="white",
+                yaxis=dict(gridcolor="#eeeeee"), xaxis=dict(dtick=5),
+                legend=dict(orientation="h", y=1.05))
+            return dcc.Graph(figure=fig, style={"height": "520px"})
 
     # ------------------------------------------------------------------ #
     @app.callback(Output("jahres-graph", "figure"), Input("jahr-dropdown", "value"))

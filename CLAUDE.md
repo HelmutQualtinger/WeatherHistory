@@ -9,11 +9,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 python3 WeatherHistoryWien.py
 python3 WeatherHistoryCasablanca.py
 python3 WeatherHistoryMedina.py
+python3 WeatherHistoryRome.py
+python3 WeatherHistoryLisbon.py
 
 # Start a dashboard (each on its own port)
 python3 StrahlungDashWien.py        # http://localhost:8050
 python3 StrahlungDashCasablanca.py  # http://localhost:8051
 python3 StrahlungDashMedina.py      # http://localhost:8052
+python3 StrahlungDashRome.py        # http://localhost:8053
+python3 StrahlungDashLisbon.py      # http://localhost:8054
 ```
 
 ## Architecture
