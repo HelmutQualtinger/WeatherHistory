@@ -22,7 +22,7 @@ Two shared libraries power all city-specific scripts:
 
 **`weather_fetch.py`** – single function `fetch_weather_data(latitude, longitude, timezone, filename, start_date, end_date)`. Calls the Open-Meteo archive API, aggregates hourly data into daily min/max/avg rows, and writes a CSV.
 
-**`weather_dash_lib.py`** – `load_data(filename)` loads a CSV and computes all aggregations (monthly/yearly kWh, monthly temp averages, monthly precip totals, yearly trend data). `create_app(cfg)` builds and returns a fully configured Dash app (used by the single-city variant if needed).
+**`weather_dash_lib.py`** – `load_data(filename)` loads a CSV and computes all aggregations (monthly/yearly kWh, monthly temp averages, monthly precip totals, yearly trend data). Used by `StrahlungDashAlle.py` at startup for every configured city.
 
 **`StrahlungDashAlle.py`** – combined dashboard on port 8055. Preloads all city data at startup, city selected via dropdown. Includes light/dark theme toggle (CSS in `assets/theme.css`, toggled via clientside callback on `<body>`).
 

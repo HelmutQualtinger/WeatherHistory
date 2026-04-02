@@ -71,8 +71,8 @@ if __name__ == "__main__":
     )
 ```
 
-1. Eintrag in `STAEDTE`-Dict in `StrahlungDashAlle.py` hinzufügen (Farben, Temperaturschwellen, Dateiname).
-1. Fetch-Script ausführen, dann Dashboard neu starten.
+2. Eintrag in `STAEDTE`-Dict in `StrahlungDashAlle.py` hinzufügen (Farben, Temperaturschwellen, Dateiname).
+3. Fetch-Script ausführen, dann Dashboard neu starten.
 
 ## Projektstruktur
 
