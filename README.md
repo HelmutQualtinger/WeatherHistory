@@ -4,7 +4,7 @@ Historische Wetterdaten abrufen und interaktiv visualisieren – powered by [Ope
 
 ## Überblick
 
-Dieses Projekt lädt stündliche Wetterdaten der Open-Meteo Archiv-API für beliebige Standorte herunter, aggregiert sie zu Tageswerten und stellt sie in interaktiven Web-Dashboards dar. Aktuell konfiguriert für **Wien**, **Casablanca**, **Medina**, **Rom** und **Lissabon**.
+Dieses Projekt lädt stündliche Wetterdaten der Open-Meteo Archiv-API für beliebige Standorte herunter, aggregiert sie zu Tageswerten und stellt sie in einem interaktiven Web-Dashboard dar. Aktuell konfiguriert für **Wien**, **Casablanca**, **Medina**, **Rom** und **Lissabon**.
 
 ## Voraussetzungen
 
@@ -12,7 +12,7 @@ Dieses Projekt lädt stündliche Wetterdaten der Open-Meteo Archiv-API für beli
 - Abhängigkeiten installieren:
 
 ```bash
-pip install requests dash plotly pandas
+pip install requests dash plotly pandas numpy
 ```
 
 ## Verwendung
@@ -32,14 +32,8 @@ Erzeugt jeweils eine CSV-Datei mit täglichen Min/Max/Durchschnittswerten für S
 ### 2. Dashboard starten
 
 ```bash
-python3 StrahlungDashWien.py        # http://localhost:8050
-python3 StrahlungDashCasablanca.py  # http://localhost:8051
-python3 StrahlungDashMedina.py      # http://localhost:8052
-python3 StrahlungDashRome.py        # http://localhost:8053
-python3 StrahlungDashLisbon.py      # http://localhost:8054
+python3 StrahlungDashAlle.py        # http://localhost:8055
 ```
-
-Alle Dashboards können gleichzeitig laufen.
 
 ## Screenshot
 
@@ -47,7 +41,7 @@ Alle Dashboards können gleichzeitig laufen.
 
 ## Dashboard-Inhalte
 
-Jedes Dashboard bietet sechs Tabs:
+Stadt per Dropdown auswählen, Light/Dark-Theme per Schaltfläche umschalten. Acht Tabs:
 
 | Tab | Inhalt |
 | --- | --- |
@@ -57,6 +51,8 @@ Jedes Dashboard bietet sechs Tabs:
 | Strahlung Jahressummen | Jährliche Gesamtstrahlung mit Durchschnittslinie |
 | Temperaturen | Monatliche Ø-Temperatur, gesamt oder nach Jahr |
 | Niederschlag | Monatlicher Niederschlag in mm mit Jahressumme |
+| Temp. Jahrestrend | Jährliche Ø-Temperatur mit linearem Fit (°C/Dekade) |
+| Niederschlag Jahrestrend | Jährlicher Gesamtniederschlag mit linearem Fit (mm/Dekade) |
 
 ## Neue Stadt hinzufügen
 
@@ -71,52 +67,25 @@ if __name__ == "__main__":
         longitude=...,
         timezone="Continent/City",
         filename="xxx_wetter.csv",
+        start_date="1980-01-01",
     )
 ```
 
-1. `StrahlungDashXxx.py` anlegen:
-
-```python
-from weather_dash_lib import create_app
-
-app = create_app({
-    "filename":                "xxx_wetter.csv",
-    "title":                   "Wetterdaten Xxx",
-    "city":                    "Xxx",
-    "h1_color":                "#xxxxxx",
-    "strahlung_colorscale":    "YlOrRd",   # Plotly-Farbskala
-    "bar_voll_color":          "#xxxxxx",
-    "bar_aktuell_color":       "#xxxxxx",
-    "precip_color":            "#xxxxxx",
-    "precip_annotation_color": "#xxxxxx",
-    "precip_annotation_bg":    "#xxxxxx",
-    "temp_cold_threshold":     10,          # °C – unter diesem Wert: kalte Farbe
-    "temp_hot_threshold":      30,          # °C – über diesem Wert: heiße Farbe
-    "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
-    "port":                    8053,
-})
-
-if __name__ == "__main__":
-    app.run(debug=True, port=8053)
-```
-
-1. Fetch-Script ausführen, dann Dashboard starten.
+1. Eintrag in `STAEDTE`-Dict in `StrahlungDashAlle.py` hinzufügen (Farben, Temperaturschwellen, Dateiname).
+1. Fetch-Script ausführen, dann Dashboard neu starten.
 
 ## Projektstruktur
 
 ```text
 weather_fetch.py          # Library: Datenabruf via Open-Meteo API
-weather_dash_lib.py       # Library: Dash-App-Factory mit allen Tabs & Callbacks
-WeatherHistoryWien.py       # Wien: Datenabruf (48.2°N, 16.4°E)
-WeatherHistoryCasablanca.py # Casablanca (33.6°N, 7.6°W)
-WeatherHistoryMedina.py     # Medina (24.5°N, 39.6°E)
-WeatherHistoryRome.py       # Rom (41.9°N, 12.5°E)
-WeatherHistoryLisbon.py     # Lissabon (38.7°N, 9.1°W)
-StrahlungDashWien.py        # Wien: Dashboard (Port 8050)
-StrahlungDashCasablanca.py  # Casablanca (Port 8051)
-StrahlungDashMedina.py      # Medina (Port 8052)
-StrahlungDashRome.py        # Rom (Port 8053)
-StrahlungDashLisbon.py      # Lissabon (Port 8054)
+weather_dash_lib.py       # Library: Datenaggregation (load_data)
+StrahlungDashAlle.py      # Kombiniertes Dashboard (Port 8055)
+assets/theme.css          # CSS für Light/Dark-Theme
+WeatherHistoryWien.py     # Wien: Datenabruf (48.2°N, 16.4°E)
+WeatherHistoryCasablanca.py
+WeatherHistoryMedina.py
+WeatherHistoryRome.py
+WeatherHistoryLisbon.py
 ```
 
 ## Datenquelle

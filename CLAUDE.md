@@ -12,12 +12,8 @@ python3 WeatherHistoryMedina.py
 python3 WeatherHistoryRome.py
 python3 WeatherHistoryLisbon.py
 
-# Start a dashboard (each on its own port)
-python3 StrahlungDashWien.py        # http://localhost:8050
-python3 StrahlungDashCasablanca.py  # http://localhost:8051
-python3 StrahlungDashMedina.py      # http://localhost:8052
-python3 StrahlungDashRome.py        # http://localhost:8053
-python3 StrahlungDashLisbon.py      # http://localhost:8054
+# Start the combined dashboard
+python3 StrahlungDashAlle.py        # http://localhost:8055
 ```
 
 ## Architecture
@@ -26,15 +22,17 @@ Two shared libraries power all city-specific scripts:
 
 **`weather_fetch.py`** – single function `fetch_weather_data(latitude, longitude, timezone, filename, start_date, end_date)`. Calls the Open-Meteo archive API, aggregates hourly data into daily min/max/avg rows, and writes a CSV.
 
-**`weather_dash_lib.py`** – `load_data(filename)` loads a CSV and computes all aggregations (monthly/yearly kWh, monthly temp averages, monthly precip totals). `create_app(cfg)` builds and returns a fully configured Dash app with six tabs: Strahlung Monatsmittel, Strahlung nach Jahr, Strahlung Zeitreihe, Strahlung Jahressummen, Temperaturen, Niederschlag. All callbacks are registered inside `create_app`.
+**`weather_dash_lib.py`** – `load_data(filename)` loads a CSV and computes all aggregations (monthly/yearly kWh, monthly temp averages, monthly precip totals, yearly trend data). `create_app(cfg)` builds and returns a fully configured Dash app (used by the single-city variant if needed).
 
-**City scripts** are thin wrappers — `WeatherHistory*.py` call `fetch_weather_data(...)` with city-specific coordinates/timezone/filename, and `StrahlungDash*.py` call `create_app(cfg)` with a config dict of colors, thresholds, and port.
+**`StrahlungDashAlle.py`** – combined dashboard on port 8055. Preloads all city data at startup, city selected via dropdown. Includes light/dark theme toggle (CSS in `assets/theme.css`, toggled via clientside callback on `<body>`).
+
+**City scripts** are thin wrappers — `WeatherHistory*.py` call `fetch_weather_data(...)` with city-specific coordinates/timezone/filename.
 
 ## Adding a new city
 
 1. Create `WeatherHistoryXxx.py` calling `fetch_weather_data(...)` with the city's coordinates and timezone.
-2. Create `StrahlungDashXxx.py` calling `create_app(cfg)` — pick an unused port and set colors/thresholds in the config dict.
-3. Run the fetch script to generate the CSV, then start the dashboard.
+2. Add an entry to the `STAEDTE` dict in `StrahlungDashAlle.py` with colors, thresholds, and the CSV filename.
+3. Run the fetch script to generate the CSV, then restart the dashboard.
 
 ## CSV format
 
@@ -42,4 +40,4 @@ Each CSV has daily rows with columns: `Datum`, then for each of the six fields (
 
 ## Dependencies
 
-Managed via `pyproject.toml` with a `.venv`. Use `python3` (not `python`). Dash and Plotly are used for dashboards but not listed in `pyproject.toml` — install manually if needed: `pip install dash plotly pandas`.
+Managed via `pyproject.toml` with a `.venv`. Use `python3` (not `python`). Dash and Plotly are used for dashboards but not listed in `pyproject.toml` — install manually if needed: `pip install dash plotly pandas numpy`.
