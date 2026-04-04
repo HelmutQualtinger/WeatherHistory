@@ -5,15 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Running the scripts 
 
 ```bash
-# Fetch weather data for a city
-python3 WeatherHistoryWien.py
-python3 WeatherHistoryCasablanca.py
-python3 WeatherHistoryMedina.py
-python3 WeatherHistoryRome.py
-python3 WeatherHistoryLisbon.py
-python3 WeatherHistorySantiago.py
-python3 WeatherHistoryLosAngeles.py
-python3 WeatherHistoryOslo.py
+# Fetch weather data for a city (run from project root)
+python3 scrape/WeatherHistoryWien.py
+python3 scrape/WeatherHistoryCasablanca.py
+# ... etc. CSVs are written to csv/
 
 # Start the combined dashboard
 python3 StrahlungDashAlle.py        # http://localhost:8055
@@ -27,15 +22,16 @@ Two shared libraries power all city-specific scripts:
 
 **`weather_dash_lib.py`** – `load_data(filename)` loads a CSV and computes all aggregations (monthly/yearly kWh, monthly temp averages, monthly precip totals, yearly trend data). Used by `StrahlungDashAlle.py` at startup for every configured city.
 
-**`StrahlungDashAlle.py`** – combined dashboard on port 8055. Preloads all city data at startup, city selected via dropdown. Includes light/dark theme toggle (CSS in `assets/theme.css`, toggled via clientside callback on `<body>`).
+**`StrahlungDashAlle.py`** – combined dashboard on port 8055. Preloads all city data at startup, city selected via dropdown. Includes light/dark theme toggle (CSS in `assets/theme.css`, toggled via clientside callback on `<body>`). Reads CSVs from `csv/`.
 
-**City scripts** are thin wrappers — `WeatherHistory*.py` call `fetch_weather_data(...)` with city-specific coordinates/timezone/filename.
+**City scripts** live in `scrape/` — `WeatherHistory*.py` call `fetch_weather_data(...)` with city-specific coordinates/timezone/filename. They use `pathlib` to resolve paths relative to their location, so they can be run from any working directory. CSVs are written to `csv/`.
 
 ## Adding a new city
 
-1. Create `WeatherHistoryXxx.py` calling `fetch_weather_data(...)` with the city's coordinates and timezone.
-2. Add an entry to the `STAEDTE` dict in `StrahlungDashAlle.py` with colors, thresholds, and the CSV filename.
-3. Run the fetch script to generate the CSV, then restart the dashboard.
+1. Create `scrape/WeatherHistoryXxx.py` calling `fetch_weather_data(...)` with the city's coordinates and timezone. Use `Path(__file__).parent.parent / "csv" / "xxx.csv"` for the filename.
+2. Add an entry to the `STAEDTE` dict in `StrahlungDashAlle.py` with colors, thresholds, and `"filename": "csv/xxx.csv"`.
+3. Add coordinates to the `KOORDINATEN` dict in `StrahlungDashAlle.py` for the world map.
+4. Run the fetch script to generate the CSV, then restart the dashboard.
 
 ## CSV format
 

@@ -47,7 +47,7 @@ THEMES = {
 # ---------------------------------------------------------------------------
 STAEDTE = {
     "Wien": {
-        "filename":                "wien_wetter_vollständig_03_2026.csv",
+        "filename": "csv/wien_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#2c3e50",
         "h1_color_dark":           "#aed6f1",
         "strahlung_colorscale":    "YlOrRd",
@@ -59,7 +59,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Lagos": {
-        "filename":                "lagos_wetter_vollständig_03_2026.csv",
+        "filename": "csv/lagos_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#117a65",
         "h1_color_dark":           "#76d7c4",
         "strahlung_colorscale":    "YlOrRd",
@@ -71,7 +71,7 @@ STAEDTE = {
         "temp_colors":             ["#f39c12", "#e74c3c", "#7b241c"],
     },
     "Nairobi": {
-        "filename":                "nairobi_wetter_vollständig_03_2026.csv",
+        "filename": "csv/nairobi_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1e6b3c",
         "h1_color_dark":           "#82e0aa",
         "strahlung_colorscale":    "YlGn",
@@ -83,7 +83,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Casablanca": {
-        "filename":                "casablanca_wetter_vollständig_03_2026.csv",
+        "filename": "csv/casablanca_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1a5276",
         "h1_color_dark":           "#7fb3d3",
         "strahlung_colorscale":    "solar",
@@ -95,7 +95,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Medina": {
-        "filename":                "medina_wetter_vollständig_03_2026.csv",
+        "filename": "csv/medina_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#6e2f00",
         "h1_color_dark":           "#e59866",
         "strahlung_colorscale":    "Oranges",
@@ -107,7 +107,7 @@ STAEDTE = {
         "temp_colors":             ["#f39c12", "#c0392b", "#7b241c"],
     },
     "Rom": {
-        "filename":                "rome_wetter_vollständig_03_2026.csv",
+        "filename": "csv/rome_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#7b241c",
         "h1_color_dark":           "#f1948a",
         "strahlung_colorscale":    "Reds",
@@ -119,7 +119,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Lissabon": {
-        "filename":                "lisbon_wetter_vollständig_03_2026.csv",
+        "filename": "csv/lisbon_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1a6b8a",
         "h1_color_dark":           "#76d7c4",
         "strahlung_colorscale":    "Blues",
@@ -131,7 +131,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Santiago": {
-        "filename":                "santiago_wetter_vollständig_03_2026.csv",
+        "filename": "csv/santiago_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#6c3483",
         "h1_color_dark":           "#d2b4de",
         "strahlung_colorscale":    "Purples",
@@ -143,7 +143,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Las Vegas": {
-        "filename":                "lasvegas_wetter_vollständig_03_2026.csv",
+        "filename": "csv/lasvegas_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#7d6608",
         "h1_color_dark":           "#f7dc6f",
         "strahlung_colorscale":    "YlOrRd",
@@ -155,7 +155,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Los Angeles": {
-        "filename":                "losangeles_wetter_vollständig_03_2026.csv",
+        "filename": "csv/losangeles_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#b7950b",
         "h1_color_dark":           "#f9e79f",
         "strahlung_colorscale":    "YlOrBr",
@@ -167,7 +167,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "New York": {
-        "filename":                "newyork_wetter_vollständig_03_2026.csv",
+        "filename": "csv/newyork_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1a3a5c",
         "h1_color_dark":           "#85c1e9",
         "strahlung_colorscale":    "Blues",
@@ -179,7 +179,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Oslo": {
-        "filename":                "oslo_wetter_vollständig_03_2026.csv",
+        "filename": "csv/oslo_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#117a65",
         "h1_color_dark":           "#76d7c4",
         "strahlung_colorscale":    "BuGn",
@@ -191,7 +191,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Yakutsk": {
-        "filename":                "yakutsk_wetter_vollständig_03_2026.csv",
+        "filename": "csv/yakutsk_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1a3a5c",
         "h1_color_dark":           "#aed6f1",
         "strahlung_colorscale":    "Blues",
@@ -203,7 +203,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Tokyo": {
-        "filename":                "tokyo_wetter_vollständig_03_2026.csv",
+        "filename": "csv/tokyo_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1b4f8a",
         "h1_color_dark":           "#85c1e9",
         "strahlung_colorscale":    "Blues",
@@ -215,7 +215,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Shanghai": {
-        "filename":                "shanghai_wetter_vollständig_03_2026.csv",
+        "filename": "csv/shanghai_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#922b21",
         "h1_color_dark":           "#f1948a",
         "strahlung_colorscale":    "Reds",
@@ -227,7 +227,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Mumbai": {
-        "filename":                "mumbai_wetter_vollständig_03_2026.csv",
+        "filename": "csv/mumbai_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#784212",
         "h1_color_dark":           "#f0b27a",
         "strahlung_colorscale":    "Oranges",
@@ -239,7 +239,7 @@ STAEDTE = {
         "temp_colors":             ["#f39c12", "#e74c3c", "#7b241c"],
     },
     "Dublin": {
-        "filename":                "dublin_wetter_vollständig_03_2026.csv",
+        "filename": "csv/dublin_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1d6b2e",
         "h1_color_dark":           "#82e0aa",
         "strahlung_colorscale":    "Greens",
@@ -251,7 +251,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#27ae60", "#f39c12"],
     },
     "Canberra": {
-        "filename":                "canberra_wetter_vollständig_03_2026.csv",
+        "filename": "csv/canberra_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1a6b3c",
         "h1_color_dark":           "#76d7a0",
         "strahlung_colorscale":    "YlGn",
@@ -263,7 +263,7 @@ STAEDTE = {
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Wellington": {
-        "filename":                "wellington_wetter_vollständig_03_2026.csv",
+        "filename": "csv/wellington_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#154360",
         "h1_color_dark":           "#7fb3d3",
         "strahlung_colorscale":    "Blues",
