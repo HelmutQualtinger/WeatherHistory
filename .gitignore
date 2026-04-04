@@ -9,8 +9,4 @@ wheels/
 # Virtual environments
 .venv
 *.csv
-casablanca_wetter_vollständig_03_2026.csv
-medina_wetter_vollständig_03_2026.csv
-wien_wetter_vollständig_03_2026.csv
-lisbon_wetter_vollständig_03_2026.csv
-rome_wetter_vollständig_03_2026.csv
+

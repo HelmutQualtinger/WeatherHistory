@@ -56,6 +56,30 @@ STAEDTE = {
         "temp_hot_threshold":      20,
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
+    "Lagos": {
+        "filename":                "lagos_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#117a65",
+        "h1_color_dark":           "#76d7c4",
+        "strahlung_colorscale":    "YlOrRd",
+        "bar_voll_color":          "#d35400",
+        "bar_aktuell_color":       "#f0b27a",
+        "precip_color":            "#1a5276",
+        "temp_cold_threshold":     22,
+        "temp_hot_threshold":      32,
+        "temp_colors":             ["#f39c12", "#e74c3c", "#7b241c"],
+    },
+    "Nairobi": {
+        "filename":                "nairobi_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#1e6b3c",
+        "h1_color_dark":           "#82e0aa",
+        "strahlung_colorscale":    "YlGn",
+        "bar_voll_color":          "#27ae60",
+        "bar_aktuell_color":       "#82e0aa",
+        "precip_color":            "#1e6b3c",
+        "temp_cold_threshold":     15,
+        "temp_hot_threshold":      28,
+        "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
     "Casablanca": {
         "filename":                "casablanca_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#1a5276",
@@ -116,6 +140,18 @@ STAEDTE = {
         "temp_hot_threshold":      25,
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
+    "Las Vegas": {
+        "filename":                "lasvegas_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#7d6608",
+        "h1_color_dark":           "#f7dc6f",
+        "strahlung_colorscale":    "YlOrRd",
+        "bar_voll_color":          "#d4ac0d",
+        "bar_aktuell_color":       "#f9e79f",
+        "precip_color":            "#7d6608",
+        "temp_cold_threshold":     10,
+        "temp_hot_threshold":      35,
+        "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
     "Los Angeles": {
         "filename":                "losangeles_wetter_vollständig_03_2026.csv",
         "h1_color_light":          "#b7950b",
@@ -126,6 +162,18 @@ STAEDTE = {
         "precip_color":            "#b7950b",
         "temp_cold_threshold":     12,
         "temp_hot_threshold":      28,
+        "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
+    "New York": {
+        "filename":                "newyork_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#1a3a5c",
+        "h1_color_dark":           "#85c1e9",
+        "strahlung_colorscale":    "Blues",
+        "bar_voll_color":          "#2471a3",
+        "bar_aktuell_color":       "#85c1e9",
+        "precip_color":            "#1a3a5c",
+        "temp_cold_threshold":     0,
+        "temp_hot_threshold":      25,
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
     },
     "Oslo": {
@@ -139,6 +187,90 @@ STAEDTE = {
         "temp_cold_threshold":     0,
         "temp_hot_threshold":      18,
         "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
+    "Yakutsk": {
+        "filename":                "yakutsk_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#1a3a5c",
+        "h1_color_dark":           "#aed6f1",
+        "strahlung_colorscale":    "Blues",
+        "bar_voll_color":          "#2471a3",
+        "bar_aktuell_color":       "#aed6f1",
+        "precip_color":            "#1a3a5c",
+        "temp_cold_threshold":     -30,
+        "temp_hot_threshold":      15,
+        "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
+    "Tokyo": {
+        "filename":                "tokyo_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#1b4f8a",
+        "h1_color_dark":           "#85c1e9",
+        "strahlung_colorscale":    "Blues",
+        "bar_voll_color":          "#2471a3",
+        "bar_aktuell_color":       "#85c1e9",
+        "precip_color":            "#1b4f8a",
+        "temp_cold_threshold":     5,
+        "temp_hot_threshold":      25,
+        "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
+    "Shanghai": {
+        "filename":                "shanghai_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#922b21",
+        "h1_color_dark":           "#f1948a",
+        "strahlung_colorscale":    "Reds",
+        "bar_voll_color":          "#c0392b",
+        "bar_aktuell_color":       "#f1948a",
+        "precip_color":            "#922b21",
+        "temp_cold_threshold":     5,
+        "temp_hot_threshold":      28,
+        "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
+    "Mumbai": {
+        "filename":                "mumbai_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#784212",
+        "h1_color_dark":           "#f0b27a",
+        "strahlung_colorscale":    "Oranges",
+        "bar_voll_color":          "#ca6f1e",
+        "bar_aktuell_color":       "#f0b27a",
+        "precip_color":            "#1a5276",
+        "temp_cold_threshold":     20,
+        "temp_hot_threshold":      32,
+        "temp_colors":             ["#f39c12", "#e74c3c", "#7b241c"],
+    },
+    "Dublin": {
+        "filename":                "dublin_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#1d6b2e",
+        "h1_color_dark":           "#82e0aa",
+        "strahlung_colorscale":    "Greens",
+        "bar_voll_color":          "#27ae60",
+        "bar_aktuell_color":       "#82e0aa",
+        "precip_color":            "#1d6b2e",
+        "temp_cold_threshold":     5,
+        "temp_hot_threshold":      18,
+        "temp_colors":             ["#3498db", "#27ae60", "#f39c12"],
+    },
+    "Canberra": {
+        "filename":                "canberra_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#1a6b3c",
+        "h1_color_dark":           "#76d7a0",
+        "strahlung_colorscale":    "YlGn",
+        "bar_voll_color":          "#229954",
+        "bar_aktuell_color":       "#76d7a0",
+        "precip_color":            "#1a6b3c",
+        "temp_cold_threshold":     10,
+        "temp_hot_threshold":      28,
+        "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
+    "Wellington": {
+        "filename":                "wellington_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#154360",
+        "h1_color_dark":           "#7fb3d3",
+        "strahlung_colorscale":    "Blues",
+        "bar_voll_color":          "#1f618d",
+        "bar_aktuell_color":       "#7fb3d3",
+        "precip_color":            "#154360",
+        "temp_cold_threshold":     8,
+        "temp_hot_threshold":      20,
+        "temp_colors":             ["#3498db", "#27ae60", "#f39c12"],
     },
 }
 
@@ -216,7 +348,18 @@ def linear_fit_fig(jahre, werte, bar_color, einheit, title, theme):
 app = dash.Dash(__name__, suppress_callback_exceptions=True)
 app.title = "Wetterdaten – Städtevergleich"
 
-stadt_optionen = [{"label": s, "value": s} for s in STAEDTE]
+KONTINENTE = {
+    "Europa":      ["Wien", "Rom", "Lissabon", "Oslo", "Dublin"],
+    "Afrika":      ["Casablanca", "Lagos", "Nairobi"],
+    "Asien":       ["Medina", "Mumbai", "Shanghai", "Tokyo", "Yakutsk"],
+    "Nordamerika": ["Las Vegas", "Los Angeles", "New York"],
+    "Südamerika":  ["Santiago"],
+    "Ozeanien":    ["Canberra", "Wellington"],
+}
+
+kontinent_optionen = [{"label": k, "value": k} for k in KONTINENTE]
+DEFAULT_KONTINENT = "Europa"
+DEFAULT_STADT = sorted(KONTINENTE[DEFAULT_KONTINENT])[0]
 
 app.layout = html.Div(
     id="main-container",
@@ -241,25 +384,36 @@ app.layout = html.Div(
             ]
         ),
 
-        # Stadt-Auswahl
+        # Kontinent + Stadt Auswahl
         html.Div(
-            style={"display": "flex", "alignItems": "center",
-                   "gap": "12px", "marginBottom": "16px"},
+            id="stadt-auswahl-container",
+            style={"marginBottom": "16px", "display": "flex", "alignItems": "center", "gap": "16px", "flexWrap": "wrap"},
             children=[
-                html.Label("Stadt:", id="stadt-label",
-                            style={"fontWeight": "bold", "fontSize": "16px"}),
-                dcc.Dropdown(
-                    id="stadt-dropdown",
-                    options=stadt_optionen,
-                    value="Wien",
-                    clearable=False,
-                    style={"width": "220px", "fontSize": "15px"},
-                ),
+                html.Div([
+                    html.Label("Kontinent:", id="kontinent-label",
+                               style={"fontWeight": "bold", "fontSize": "14px", "display": "block", "marginBottom": "4px"}),
+                    dcc.Dropdown(
+                        id="kontinent-dropdown",
+                        options=kontinent_optionen,
+                        value=DEFAULT_KONTINENT,
+                        clearable=False,
+                        style={"width": "180px", "fontSize": "14px"},
+                    ),
+                ]),
+                html.Div([
+                    html.Label("Stadt:", id="stadt-label",
+                               style={"fontWeight": "bold", "fontSize": "14px", "display": "block", "marginBottom": "4px"}),
+                    dcc.Dropdown(
+                        id="stadt-dropdown",
+                        value=DEFAULT_STADT,
+                        clearable=False,
+                        style={"width": "180px", "fontSize": "14px"},
+                    ),
+                ]),
             ]
         ),
 
-        dcc.Tabs(id="tabs", value="mittelwert", children=[
-            dcc.Tab(label="Strahlung Monatsmittel",   value="mittelwert"),
+        dcc.Tabs(id="tabs", value="jahresverlauf", children=[
             dcc.Tab(label="Strahlung nach Jahr",      value="jahresverlauf"),
             dcc.Tab(label="Strahlung Zeitreihe",      value="zeitreihe"),
             dcc.Tab(label="Strahlung Jahressummen",   value="jahressummen"),
@@ -269,7 +423,21 @@ app.layout = html.Div(
             dcc.Tab(label="Niederschlag Jahrestrend", value="precip_trend"),
         ]),
 
-        html.Div(id="tab-inhalt", style={"marginTop": "20px"}),
+        # Year selectors live in the static layout so selections survive tab re-renders
+        html.Div(id="jahr-selector-container", style={"display": "none", "marginTop": "12px", "marginBottom": "4px"}, children=[
+            html.Label("Jahr auswählen:", id="jahr-label", style={"fontWeight": "bold"}),
+            dcc.Dropdown(id="jahr-dropdown", clearable=False, style={"width": "200px"}),
+        ]),
+        html.Div(id="temp-selector-container", style={"display": "none", "marginTop": "12px", "marginBottom": "4px"}, children=[
+            html.Label("Jahr auswählen:", id="temp-label", style={"fontWeight": "bold"}),
+            dcc.Dropdown(id="temp-dropdown", clearable=False, style={"width": "200px"}),
+        ]),
+        html.Div(id="precip-selector-container", style={"display": "none", "marginTop": "12px", "marginBottom": "4px"}, children=[
+            html.Label("Jahr auswählen:", id="precip-label", style={"fontWeight": "bold"}),
+            dcc.Dropdown(id="precip-dropdown", clearable=False, style={"width": "200px"}),
+        ]),
+
+        html.Div(id="tab-inhalt", style={"marginTop": "12px"}),
     ]
 )
 
@@ -311,7 +479,10 @@ def update_container_style(theme):
 @app.callback(
     Output("titel", "children"),
     Output("titel", "style"),
+    Output("kontinent-label", "style"),
     Output("stadt-label", "style"),
+    Output("kontinent-dropdown", "style"),
+    Output("stadt-dropdown", "style"),
     Input("stadt-dropdown", "value"),
     Input("theme-store", "data"),
 )
@@ -319,9 +490,93 @@ def update_titel(stadt, theme):
     t = THEMES[theme]
     cfg = STAEDTE[stadt]
     farbe = cfg[f"h1_color_{theme}"]
+    lbl = {"fontWeight": "bold", "fontSize": "14px", "display": "block",
+           "marginBottom": "4px", "color": t["font"]}
+    dd = {"width": "180px", "fontSize": "14px",
+          "backgroundColor": t["plot_bg"], "color": t["font"]}
     return (f"Wetterdaten {stadt}",
             {"margin": 0, "color": farbe},
-            {"fontWeight": "bold", "fontSize": "16px", "color": t["font"]})
+            lbl, lbl, dd, dd)
+
+
+@app.callback(
+    Output("stadt-dropdown", "options"),
+    Output("stadt-dropdown", "value"),
+    Input("kontinent-dropdown", "value"),
+    State("stadt-dropdown", "value"),
+)
+def update_stadt_optionen(kontinent, aktuelle_stadt):
+    staedte = sorted(KONTINENTE[kontinent])
+    opts = [{"label": s, "value": s} for s in staedte]
+    neuer_wert = aktuelle_stadt if aktuelle_stadt in staedte else staedte[0]
+    return opts, neuer_wert
+
+
+# ---------------------------------------------------------------------------
+# Year-selector visibility, options, and styling
+# ---------------------------------------------------------------------------
+@app.callback(
+    Output("jahr-selector-container", "style"),
+    Output("temp-selector-container", "style"),
+    Output("precip-selector-container", "style"),
+    Output("jahr-label", "style"),
+    Output("temp-label", "style"),
+    Output("precip-label", "style"),
+    Output("jahr-dropdown", "style"),
+    Output("temp-dropdown", "style"),
+    Output("precip-dropdown", "style"),
+    Input("tabs", "value"),
+    Input("theme-store", "data"),
+)
+def update_selector_visibility(tab, theme):
+    t = THEMES[theme]
+    label_style = {"fontWeight": "bold", "color": t["font"]}
+    dd_style = {"width": "200px", "backgroundColor": t["plot_bg"], "color": t["font"]}
+    base = {"marginTop": "12px", "marginBottom": "4px"}
+
+    def vis(show):
+        return {**base, "display": "block" if show else "none"}
+
+    return (
+        vis(tab == "jahresverlauf"),
+        vis(tab == "temperaturen"),
+        vis(tab == "niederschlag"),
+        label_style, label_style, label_style,
+        dd_style, dd_style, dd_style,
+    )
+
+
+@app.callback(
+    Output("jahr-dropdown", "options"),
+    Output("jahr-dropdown", "value"),
+    Input("stadt-dropdown", "value"),
+)
+def update_jahr_options(stadt):
+    alle_jahre = DATEN[stadt]["alle_jahre"]
+    opts = [{"label": "Ø alle Jahre", "value": "alle"}] + [{"label": str(j), "value": j} for j in alle_jahre]
+    return opts, "alle"
+
+
+@app.callback(
+    Output("temp-dropdown", "options"),
+    Output("temp-dropdown", "value"),
+    Input("stadt-dropdown", "value"),
+)
+def update_temp_options(stadt):
+    alle_jahre = DATEN[stadt]["alle_jahre"]
+    opts = [{"label": "Ø alle Jahre", "value": "alle"}] + [{"label": str(j), "value": j} for j in alle_jahre]
+    return opts, "alle"
+
+
+@app.callback(
+    Output("precip-dropdown", "options"),
+    Output("precip-dropdown", "value"),
+    Input("stadt-dropdown", "value"),
+)
+def update_precip_options(stadt):
+    alle_jahre = DATEN[stadt]["alle_jahre"]
+    opts = [{"label": "Ø alle Jahre", "value": "alle"}] + [{"label": str(j), "value": j} for j in alle_jahre]
+    return opts, "alle"
 
 
 # ---------------------------------------------------------------------------
@@ -348,38 +603,13 @@ def render_tab(tab, stadt, theme):
     precip_mittel    = d["precip_mittel"]
     temp_jaehrlich   = d["temp_jaehrlich"]
     precip_jaehrlich = d["precip_jaehrlich"]
-    alle_jahre       = d["alle_jahre"]
 
     jaehrlich_voll    = jaehrlich[jaehrlich["Jahr"] < 2026]
     jaehrlich_aktuell = jaehrlich[jaehrlich["Jahr"] == 2026]
     jaehrlich_mittel  = jaehrlich_voll["kWh_Jahr"].mean()
 
-    dropdown_style = {
-        "width": "200px",
-        "backgroundColor": t["plot_bg"],
-        "color": t["font"],
-    }
-    jahr_optionen = ([{"label": "Ø alle Jahre", "value": "alle"}]
-                     + [{"label": str(j), "value": j} for j in alle_jahre])
-
-    if tab == "mittelwert":
-        fig = go.Figure(go.Bar(
-            x=monatsmittel["MonatName"], y=monatsmittel["kWh_Mittel"].round(1),
-            marker_color=getattr(px.colors.sequential, sc),
-            text=monatsmittel["kWh_Mittel"].round(1), textposition="outside"))
-        fig.update_layout(title=f"Ø Solarenergie pro Monat – {stadt}",
-                          xaxis_title="Monat", yaxis_title="kWh/m²")
-        return dcc.Graph(figure=theme_fig(fig, theme), style={"height": "500px"})
-
-    elif tab == "jahresverlauf":
-        return html.Div([
-            html.Label("Jahr auswählen:",
-                       style={"fontWeight": "bold", "color": t["font"]}),
-            dcc.Dropdown(id="jahr-dropdown",
-                         options=[{"label": str(j), "value": j} for j in alle_jahre],
-                         value=alle_jahre[-1], clearable=False, style=dropdown_style),
-            dcc.Graph(id="jahres-graph", style={"height": "500px"}),
-        ])
+    if tab == "jahresverlauf":
+        return dcc.Graph(id="jahres-graph", style={"height": "500px"})
 
     elif tab == "jahressummen":
         fig = go.Figure()
@@ -421,22 +651,10 @@ def render_tab(tab, stadt, theme):
         return dcc.Graph(figure=theme_fig(fig, theme), style={"height": "550px"})
 
     elif tab == "temperaturen":
-        return html.Div([
-            html.Label("Jahr auswählen:",
-                       style={"fontWeight": "bold", "color": t["font"]}),
-            dcc.Dropdown(id="temp-dropdown", options=jahr_optionen,
-                         value="alle", clearable=False, style=dropdown_style),
-            dcc.Graph(id="temp-graph", style={"height": "500px"}),
-        ])
+        return dcc.Graph(id="temp-graph", style={"height": "500px"})
 
     elif tab == "niederschlag":
-        return html.Div([
-            html.Label("Jahr auswählen:",
-                       style={"fontWeight": "bold", "color": t["font"]}),
-            dcc.Dropdown(id="precip-dropdown", options=jahr_optionen,
-                         value="alle", clearable=False, style=dropdown_style),
-            dcc.Graph(id="precip-graph", style={"height": "500px"}),
-        ])
+        return dcc.Graph(id="precip-graph", style={"height": "500px"})
 
     elif tab == "temp_trend":
         jahre = temp_jaehrlich["Jahr"].values
@@ -468,14 +686,21 @@ def update_jahresgraph(jahr, stadt, theme):
     d = DATEN[stadt]
     cfg = STAEDTE[stadt]
     sc = cfg["strahlung_colorscale"]
-    gefiltert = d["monthly"][d["monthly"]["Jahr"] == jahr].copy()
-    gefiltert["MonatName"] = gefiltert["Monat"].map(MONATSNAMEN)
+    if jahr == "alle":
+        x = d["monatsmittel"]["MonatName"]
+        y = d["monatsmittel"]["kWh_Mittel"].round(1)
+        titel = f"Ø Solarenergie pro Monat – {stadt}"
+    else:
+        gefiltert = d["monthly"][d["monthly"]["Jahr"] == jahr].copy()
+        gefiltert["MonatName"] = gefiltert["Monat"].map(MONATSNAMEN)
+        x = gefiltert["MonatName"]
+        y = gefiltert["kWh_Tag"].round(1)
+        titel = f"Solarenergie {jahr} – {stadt}, kWh/m² pro Monat"
     fig = go.Figure(go.Bar(
-        x=gefiltert["MonatName"], y=gefiltert["kWh_Tag"].round(1),
+        x=x, y=y,
         marker_color=getattr(px.colors.sequential, sc),
-        text=gefiltert["kWh_Tag"].round(1), textposition="outside"))
-    fig.update_layout(title=f"Solarenergie {jahr} – {stadt}, kWh/m² pro Monat",
-                      xaxis_title="Monat", yaxis_title="kWh/m²")
+        text=y, textposition="outside"))
+    fig.update_layout(title=titel, xaxis_title="Monat", yaxis_title="kWh/m²")
     return theme_fig(fig, theme)
 
 

@@ -24,6 +24,37 @@ body.dark-mode .tabs-container {
     border-color: #2e3347 !important;
 }
 
+/* Stadt-Auswahl Pills */
+.stadt-radio label {
+    background: #f4f4f4;
+    color: #2c3e50;
+    transition: background 0.15s, color 0.15s;
+}
+.stadt-radio label:hover {
+    background: #dde8f5;
+}
+.stadt-radio input:checked + label,
+.stadt-radio label:has(input:checked) {
+    background: #2c3e50 !important;
+    color: #ffffff !important;
+    border-color: #2c3e50 !important;
+}
+
+body.dark-mode .stadt-radio label {
+    background: #1e2130;
+    color: #e0e0e0;
+    border-color: #3a3f55;
+}
+body.dark-mode .stadt-radio label:hover {
+    background: #2a2f45;
+}
+body.dark-mode .stadt-radio input:checked + label,
+body.dark-mode .stadt-radio label:has(input:checked) {
+    background: #5b9bd5 !important;
+    color: #ffffff !important;
+    border-color: #5b9bd5 !important;
+}
+
 /* Dropdown – outer wrapper */
 body.dark-mode .Select-control,
 body.dark-mode .dash-dropdown .Select-control {
