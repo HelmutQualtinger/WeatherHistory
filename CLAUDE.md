@@ -62,4 +62,4 @@ Each CSV has daily rows with columns: `Datum`, then for each of the six fields (
 
 ## Dependencies
 
-Managed via `pyproject.toml` with a `.venv`. Use `python3` (not `python`). Dash and Plotly are used for dashboards but not listed in `pyproject.toml` — install manually if needed: `pip install dash plotly pandas numpy`.
+Managed via `pyproject.toml` with a `.venv`. Use `python3` (not `python`). Install with `pip install -e .` or `uv sync`.

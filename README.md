@@ -20,7 +20,9 @@ Dieses Projekt lädt stündliche Wetterdaten der Open-Meteo Archiv-API für beli
 - Abhängigkeiten installieren:
 
 ```bash
-pip install requests dash plotly pandas numpy
+pip install -e .
+# oder
+uv sync
 ```
 
 ## Verwendung
