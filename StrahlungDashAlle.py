@@ -5,6 +5,7 @@ import dash
 from dash import dcc, html, Input, Output, State
 
 from weather_dash_lib import load_data, MONATSNAMEN
+import webbrowser
 
 # ---------------------------------------------------------------------------
 # Themes
@@ -23,6 +24,7 @@ THEMES = {
         "tab_sel_bg":   "#ffffff",
         "tab_border":   "#d0d0d0",
         "ann_bg":       "rgba(255,255,255,0.85)",
+        "ann_border":   "#444444",
     },
     "dark": {
         "plot_bg":      "#1e2130",
@@ -357,6 +359,28 @@ KONTINENTE = {
     "Ozeanien":    ["Canberra", "Wellington"],
 }
 
+KOORDINATEN = {
+    "Wien":        (48.2082,  16.3738),
+    "Casablanca":  (33.5731,  -7.5898),
+    "Medina":      (24.5247,  39.5692),
+    "Rom":         (41.9028,  12.4964),
+    "Lissabon":    (38.7223,  -9.1393),
+    "Santiago":    (-33.4489, -70.6693),
+    "Los Angeles": (34.0522, -118.2437),
+    "Las Vegas":   (36.1699, -115.1398),
+    "New York":    (40.7128,  -74.0060),
+    "Oslo":        (59.9139,   10.7522),
+    "Tokyo":       (35.6762,  139.6503),
+    "Shanghai":    (31.2304,  121.4737),
+    "Mumbai":      (19.0760,   72.8777),
+    "Dublin":      (53.3498,   -6.2603),
+    "Canberra":    (-35.2809, 149.1300),
+    "Wellington":  (-41.2866, 174.7756),
+    "Yakutsk":     (62.0355,  129.6755),
+    "Lagos":       (6.5244,     3.3792),
+    "Nairobi":     (-1.2921,   36.8219),
+}
+
 kontinent_optionen = [{"label": k, "value": k} for k in KONTINENTE]
 DEFAULT_KONTINENT = "Europa"
 DEFAULT_STADT = sorted(KONTINENTE[DEFAULT_KONTINENT])[0]
@@ -364,80 +388,116 @@ DEFAULT_STADT = sorted(KONTINENTE[DEFAULT_KONTINENT])[0]
 app.layout = html.Div(
     id="main-container",
     style={"fontFamily": "Arial, sans-serif", "maxWidth": "1300px",
-           "margin": "0 auto", "padding": "20px", "minHeight": "100vh"},
+           "margin": "0 auto", "padding": "12px 20px", "minHeight": "100vh"},
     children=[
         dcc.Store(id="theme-store", data="light"),
 
-        # Header
+        # Single top row: controls left | map right
         html.Div(
-            style={"display": "flex", "justifyContent": "space-between",
-                   "alignItems": "center", "marginBottom": "10px"},
+            style={"display": "flex", "alignItems": "flex-start",
+                   "gap": "16px", "marginBottom": "10px"},
             children=[
-                html.H1(id="titel", style={"margin": 0}),
-                html.Button(
-                    id="theme-toggle",
-                    n_clicks=0,
-                    style={"padding": "8px 18px", "borderRadius": "20px",
-                           "border": "none", "cursor": "pointer",
-                           "fontSize": "14px", "fontWeight": "bold"},
+                # ── Left column ──────────────────────────────────────────
+                html.Div(
+                    id="stadt-auswahl-container",
+                    style={"display": "flex", "flexDirection": "column", "gap": "6px"},
+                    children=[
+                        html.H2(id="titel", style={"margin": "0 0 4px 0", "fontSize": "20px"}),
+                        # Row 1: Kontinent + Stadt side by side
+                        html.Div(
+                            style={"display": "flex", "gap": "10px", "alignItems": "flex-end"},
+                            children=[
+                                html.Div([
+                                    html.Label("Kontinent:", id="kontinent-label",
+                                               style={"fontWeight": "bold", "fontSize": "12px",
+                                                      "display": "block", "marginBottom": "2px"}),
+                                    dcc.Dropdown(id="kontinent-dropdown",
+                                                 options=kontinent_optionen,
+                                                 value=DEFAULT_KONTINENT,
+                                                 clearable=False,
+                                                 style={"width": "160px", "fontSize": "13px"}),
+                                ]),
+                                html.Div([
+                                    html.Label("Stadt:", id="stadt-label",
+                                               style={"fontWeight": "bold", "fontSize": "12px",
+                                                      "display": "block", "marginBottom": "2px"}),
+                                    dcc.Dropdown(id="stadt-dropdown",
+                                                 value=DEFAULT_STADT,
+                                                 clearable=False,
+                                                 style={"width": "160px", "fontSize": "13px"}),
+                                ]),
+                            ]
+                        ),
+                        # Row 2: Ansicht + Jahr side by side
+                        html.Div(
+                            style={"display": "flex", "gap": "10px", "alignItems": "flex-end"},
+                            children=[
+                                html.Div([
+                                    html.Label("Ansicht:", id="ansicht-label",
+                                               style={"fontWeight": "bold", "fontSize": "12px",
+                                                      "display": "block", "marginBottom": "2px"}),
+                                    dcc.Dropdown(
+                                        id="tabs",
+                                        value="jahresverlauf",
+                                        clearable=False,
+                                        style={"width": "200px", "fontSize": "13px"},
+                                        options=[
+                                            {"label": "Strahlung nach Jahr",      "value": "jahresverlauf"},
+                                            {"label": "Strahlung Zeitreihe",      "value": "zeitreihe"},
+                                            {"label": "Strahlung Jahressummen",   "value": "jahressummen"},
+                                            {"label": "Temperaturen",             "value": "temperaturen"},
+                                            {"label": "Niederschlag",             "value": "niederschlag"},
+                                            {"label": "Temp. Jahrestrend",        "value": "temp_trend"},
+                                            {"label": "Niederschlag Jahrestrend", "value": "precip_trend"},
+                                        ],
+                                    ),
+                                ]),
+                                html.Div(id="jahr-selector-container", style={"display": "none"}, children=[
+                                    html.Label("Jahr:", id="jahr-label",
+                                               style={"fontWeight": "bold", "fontSize": "12px",
+                                                      "display": "block", "marginBottom": "2px"}),
+                                    dcc.Dropdown(id="jahr-dropdown", clearable=False,
+                                                 style={"width": "140px", "fontSize": "13px"}),
+                                ]),
+                                html.Div(id="temp-selector-container", style={"display": "none"}, children=[
+                                    html.Label("Jahr:", id="temp-label",
+                                               style={"fontWeight": "bold", "fontSize": "12px",
+                                                      "display": "block", "marginBottom": "2px"}),
+                                    dcc.Dropdown(id="temp-dropdown", clearable=False,
+                                                 style={"width": "140px", "fontSize": "13px"}),
+                                ]),
+                                html.Div(id="precip-selector-container", style={"display": "none"}, children=[
+                                    html.Label("Jahr:", id="precip-label",
+                                               style={"fontWeight": "bold", "fontSize": "12px",
+                                                      "display": "block", "marginBottom": "2px"}),
+                                    dcc.Dropdown(id="precip-dropdown", clearable=False,
+                                                 style={"width": "140px", "fontSize": "13px"}),
+                                ]),
+                            ]
+                        ),
+                    ]
+                ),
+
+                # ── Right column: theme toggle + map ─────────────────────
+                html.Div(
+                    style={"flex": "1", "display": "flex", "flexDirection": "column",
+                           "alignItems": "flex-end", "gap": "6px"},
+                    children=[
+                        html.Button(
+                            id="theme-toggle",
+                            n_clicks=0,
+                            style={"padding": "5px 14px", "borderRadius": "16px",
+                                   "border": "none", "cursor": "pointer",
+                                   "fontSize": "12px", "fontWeight": "bold"},
+                        ),
+                        dcc.Graph(id="world-map", style={"width": "100%", "height": "180px"},
+                                  config={"scrollZoom": False, "displayModeBar": False}),
+                    ]
                 ),
             ]
         ),
 
-        # Kontinent + Stadt Auswahl
-        html.Div(
-            id="stadt-auswahl-container",
-            style={"marginBottom": "16px", "display": "flex", "alignItems": "center", "gap": "16px", "flexWrap": "wrap"},
-            children=[
-                html.Div([
-                    html.Label("Kontinent:", id="kontinent-label",
-                               style={"fontWeight": "bold", "fontSize": "14px", "display": "block", "marginBottom": "4px"}),
-                    dcc.Dropdown(
-                        id="kontinent-dropdown",
-                        options=kontinent_optionen,
-                        value=DEFAULT_KONTINENT,
-                        clearable=False,
-                        style={"width": "180px", "fontSize": "14px"},
-                    ),
-                ]),
-                html.Div([
-                    html.Label("Stadt:", id="stadt-label",
-                               style={"fontWeight": "bold", "fontSize": "14px", "display": "block", "marginBottom": "4px"}),
-                    dcc.Dropdown(
-                        id="stadt-dropdown",
-                        value=DEFAULT_STADT,
-                        clearable=False,
-                        style={"width": "180px", "fontSize": "14px"},
-                    ),
-                ]),
-            ]
-        ),
-
-        dcc.Tabs(id="tabs", value="jahresverlauf", children=[
-            dcc.Tab(label="Strahlung nach Jahr",      value="jahresverlauf"),
-            dcc.Tab(label="Strahlung Zeitreihe",      value="zeitreihe"),
-            dcc.Tab(label="Strahlung Jahressummen",   value="jahressummen"),
-            dcc.Tab(label="Temperaturen",             value="temperaturen"),
-            dcc.Tab(label="Niederschlag",             value="niederschlag"),
-            dcc.Tab(label="Temp. Jahrestrend",        value="temp_trend"),
-            dcc.Tab(label="Niederschlag Jahrestrend", value="precip_trend"),
-        ]),
-
-        # Year selectors live in the static layout so selections survive tab re-renders
-        html.Div(id="jahr-selector-container", style={"display": "none", "marginTop": "12px", "marginBottom": "4px"}, children=[
-            html.Label("Jahr auswählen:", id="jahr-label", style={"fontWeight": "bold"}),
-            dcc.Dropdown(id="jahr-dropdown", clearable=False, style={"width": "200px"}),
-        ]),
-        html.Div(id="temp-selector-container", style={"display": "none", "marginTop": "12px", "marginBottom": "4px"}, children=[
-            html.Label("Jahr auswählen:", id="temp-label", style={"fontWeight": "bold"}),
-            dcc.Dropdown(id="temp-dropdown", clearable=False, style={"width": "200px"}),
-        ]),
-        html.Div(id="precip-selector-container", style={"display": "none", "marginTop": "12px", "marginBottom": "4px"}, children=[
-            html.Label("Jahr auswählen:", id="precip-label", style={"fontWeight": "bold"}),
-            dcc.Dropdown(id="precip-dropdown", clearable=False, style={"width": "200px"}),
-        ]),
-
-        html.Div(id="tab-inhalt", style={"marginTop": "12px"}),
+        html.Div(id="tab-inhalt", style={"marginTop": "8px"}),
     ]
 )
 
@@ -481,8 +541,10 @@ def update_container_style(theme):
     Output("titel", "style"),
     Output("kontinent-label", "style"),
     Output("stadt-label", "style"),
+    Output("ansicht-label", "style"),
     Output("kontinent-dropdown", "style"),
     Output("stadt-dropdown", "style"),
+    Output("tabs", "style"),
     Input("stadt-dropdown", "value"),
     Input("theme-store", "data"),
 )
@@ -490,13 +552,15 @@ def update_titel(stadt, theme):
     t = THEMES[theme]
     cfg = STAEDTE[stadt]
     farbe = cfg[f"h1_color_{theme}"]
-    lbl = {"fontWeight": "bold", "fontSize": "14px", "display": "block",
-           "marginBottom": "4px", "color": t["font"]}
-    dd = {"width": "180px", "fontSize": "14px",
-          "backgroundColor": t["plot_bg"], "color": t["font"]}
+    lbl = {"fontWeight": "bold", "fontSize": "12px", "display": "block",
+           "marginBottom": "2px", "color": t["font"]}
+    dd_city = {"width": "160px", "fontSize": "13px",
+               "backgroundColor": t["plot_bg"], "color": t["font"]}
+    dd_tab  = {"width": "200px", "fontSize": "13px",
+               "backgroundColor": t["plot_bg"], "color": t["font"]}
     return (f"Wetterdaten {stadt}",
-            {"margin": 0, "color": farbe},
-            lbl, lbl, dd, dd)
+            {"margin": "0 0 4px 0", "fontSize": "20px", "color": farbe},
+            lbl, lbl, lbl, dd_city, dd_city, dd_tab)
 
 
 @app.callback(
@@ -510,6 +574,70 @@ def update_stadt_optionen(kontinent, aktuelle_stadt):
     opts = [{"label": s, "value": s} for s in staedte]
     neuer_wert = aktuelle_stadt if aktuelle_stadt in staedte else staedte[0]
     return opts, neuer_wert
+
+
+@app.callback(
+    Output("world-map", "figure"),
+    Input("stadt-dropdown", "value"),
+    Input("theme-store", "data"),
+)
+def render_world_map(selected, theme):
+    t = THEMES[theme]
+    staedte = list(KOORDINATEN.keys())
+    lats  = [KOORDINATEN[s][0] for s in staedte]
+    lons  = [KOORDINATEN[s][1] for s in staedte]
+    sizes = [18 if s == selected else 10 for s in staedte]
+    colors = [STAEDTE[s]["bar_voll_color"] for s in staedte]
+    borders = ["white" if s == selected else t["paper_bg"] for s in staedte]
+    bwidths = [3 if s == selected else 1 for s in staedte]
+
+    fig = go.Figure(go.Scattergeo(
+        lat=lats, lon=lons,
+        text=staedte,
+        customdata=staedte,
+        mode="markers+text",
+        textposition="top center",
+        textfont=dict(size=10, color=t["font"]),
+        marker=dict(
+            size=sizes,
+            color=colors,
+            line=dict(color=borders, width=bwidths),
+        ),
+        hovertemplate="%{text}<extra></extra>",
+    ))
+    fig.update_layout(
+        paper_bgcolor=t["paper_bg"],
+        margin=dict(l=0, r=0, t=0, b=0),
+        geo=dict(
+            showland=True,
+            landcolor="#d4d4d4" if theme == "light" else "#2e3347",
+            showocean=True,
+            oceancolor="#a8d0e8" if theme == "light" else "#1e2130",
+            showcoastlines=True,
+            coastlinecolor="#888888" if theme == "light" else "#555555",
+            showcountries=True,
+            countrycolor="#aaaaaa" if theme == "light" else "#444444",
+            bgcolor=t["paper_bg"],
+            projection_type="natural earth",
+        ),
+    )
+    return fig
+
+
+@app.callback(
+    Output("kontinent-dropdown", "value"),
+    Output("stadt-dropdown", "value", allow_duplicate=True),
+    Input("world-map", "clickData"),
+    prevent_initial_call=True,
+)
+def map_click(clickData):
+    if not clickData:
+        raise dash.exceptions.PreventUpdate
+    stadt = clickData["points"][0]["text"]
+    for kontinent, staedte in KONTINENTE.items():
+        if stadt in staedte:
+            return kontinent, stadt
+    raise dash.exceptions.PreventUpdate
 
 
 # ---------------------------------------------------------------------------
@@ -530,12 +658,13 @@ def update_stadt_optionen(kontinent, aktuelle_stadt):
 )
 def update_selector_visibility(tab, theme):
     t = THEMES[theme]
-    label_style = {"fontWeight": "bold", "color": t["font"]}
-    dd_style = {"width": "200px", "backgroundColor": t["plot_bg"], "color": t["font"]}
-    base = {"marginTop": "12px", "marginBottom": "4px"}
+    label_style = {"fontWeight": "bold", "fontSize": "12px", "display": "block",
+                   "marginBottom": "2px", "color": t["font"]}
+    dd_style = {"width": "140px", "fontSize": "13px",
+                "backgroundColor": t["plot_bg"], "color": t["font"]}
 
     def vis(show):
-        return {**base, "display": "block" if show else "none"}
+        return {"display": "block" if show else "none"}
 
     return (
         vis(tab == "jahresverlauf"),
@@ -790,4 +919,5 @@ app.clientside_callback(
 )
 
 if __name__ == "__main__":
+    webbrowser.open('http://localhost:8055')
     app.run(debug=True, port=8055)
