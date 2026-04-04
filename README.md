@@ -101,8 +101,9 @@ if __name__ == "__main__":
 ```
 
 2. Eintrag in `STAEDTE`-Dict in `StrahlungDashAlle.py` hinzufügen (Farben, Temperaturschwellen, `"filename": "csv/xxx_wetter.csv"`).
-3. Koordinaten in `KOORDINATEN`-Dict in `StrahlungDashAlle.py` eintragen (für die Weltkarte).
-4. Fetch-Script ausführen, dann Dashboard neu starten.
+3. Stadt dem passenden Kontinent im `KONTINENTE`-Dict hinzufügen (steuert das Kontinent-Dropdown).
+4. Koordinaten in `KOORDINATEN`-Dict eintragen (für die Weltkarte).
+5. Fetch-Script ausführen, dann Dashboard neu starten.
 
 ## Projektstruktur
 
@@ -111,7 +112,7 @@ weather_fetch.py               # Library: Datenabruf via Open-Meteo API
 weather_dash_lib.py            # Library: Datenaggregation (load_data)
 StrahlungDashAlle.py           # Kombiniertes Dashboard (Port 8055)
 assets/theme.css               # CSS für Light/Dark-Theme
-csv/                           # Generierte Wetterdaten (CSV)
+csv/                           # Generierte Wetterdaten (gitignored)
 scrape/
   WeatherHistoryWien.py        # Wien        (48.2°N,  16.4°E)
   WeatherHistoryCasablanca.py  # Casablanca  (33.6°N,   7.6°W)
