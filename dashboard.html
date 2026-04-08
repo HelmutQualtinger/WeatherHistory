@@ -767,13 +767,6 @@ document.getElementById('theme-toggle').addEventListener('click', function() {
   applyTheme();
 });
 
-// Map click
-document.getElementById('world-map').on('plotly_click', function(data) {
-  if (!data || !data.points || !data.points.length) return;
-  const city = data.points[0].text;
-  selectCity(city);
-});
-
 // ============================================================
 // Init
 // ============================================================
@@ -796,6 +789,14 @@ document.getElementById('world-map').on('plotly_click', function(data) {
   titleEl.style.color = h1Color();
 
   renderMap();
+
+  // Map click — must be wired AFTER Plotly renders the map element
+  document.getElementById('world-map').on('plotly_click', function(data) {
+    if (!data || !data.points || !data.points.length) return;
+    const city = data.points[0].text;
+    selectCity(city);
+  });
+
   render();
 })();
 </script>
