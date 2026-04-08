@@ -274,7 +274,34 @@ STAEDTE = {
         "temp_hot_threshold":      20,
         "temp_colors":             ["#3498db", "#27ae60", "#f39c12"],
     },
+    "Kapstadt": {
+        "filename":                "csv/kapstadt_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#6c3483",
+        "h1_color_dark":           "#c39bd3",
+        "strahlung_colorscale":    "Purples",
+        "bar_voll_color":          "#8e44ad",
+        "bar_aktuell_color":       "#c39bd3",
+        "precip_color":            "#5b2c6f",
+        "temp_cold_threshold":     12,
+        "temp_hot_threshold":      25,
+        "temp_colors":             ["#3498db", "#f39c12", "#e74c3c"],
+    },
+    "Rio": {
+        "filename":                "csv/rio_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#1d6a2e",
+        "h1_color_dark":           "#58d68d",
+        "strahlung_colorscale":    "YlGn",
+        "bar_voll_color":          "#27ae60",
+        "bar_aktuell_color":       "#a9dfbf",
+        "precip_color":            "#1a5276",
+        "temp_cold_threshold":     20,
+        "temp_hot_threshold":      30,
+        "temp_colors":             ["#f39c12", "#e74c3c", "#7b241c"],
+    },
 }
+
+# Recommendation: Merge KOORDINATEN and KONTINENTE logic into the STAEDTE dict 
+# to reduce maintenance overhead.
 
 # ---------------------------------------------------------------------------
 # Daten vorladen
@@ -352,10 +379,10 @@ app.title = "Wetterdaten – Städtevergleich"
 
 KONTINENTE = {
     "Europa":      ["Wien", "Rom", "Lissabon", "Oslo", "Dublin"],
-    "Afrika":      ["Casablanca", "Lagos", "Nairobi"],
+    "Afrika":      ["Casablanca", "Lagos", "Nairobi", "Kapstadt"],
     "Asien":       ["Medina", "Mumbai", "Shanghai", "Tokyo", "Yakutsk"],
     "Nordamerika": ["Las Vegas", "Los Angeles", "New York"],
-    "Südamerika":  ["Santiago"],
+    "Südamerika":  ["Santiago", "Rio"],
     "Ozeanien":    ["Canberra", "Wellington"],
 }
 
@@ -379,6 +406,8 @@ KOORDINATEN = {
     "Yakutsk":     (62.0355,  129.6755),
     "Lagos":       (6.5244,     3.3792),
     "Nairobi":     (-1.2921,   36.8219),
+    "Kapstadt":    (-33.9249,  18.4241),
+    "Rio":         (-22.9068, -43.1729),
 }
 
 kontinent_optionen = [{"label": k, "value": k} for k in KONTINENTE]
@@ -388,7 +417,8 @@ DEFAULT_STADT = sorted(KONTINENTE[DEFAULT_KONTINENT])[0]
 app.layout = html.Div(
     id="main-container",
     style={"fontFamily": "Arial, sans-serif", "maxWidth": "1300px",
-           "margin": "0 auto", "padding": "12px 20px", "minHeight": "100vh"},
+           "margin": "0 auto", "padding": "12px 20px", "minHeight": "100vh",
+           "transition": "background-color 0.3s, color 0.3s"},
     children=[
         dcc.Store(id="theme-store", data="light"),
 
@@ -511,7 +541,7 @@ app.layout = html.Div(
     State("theme-store", "data"),
     prevent_initial_call=True,
 )
-def toggle_theme(n, current):
+def toggle_theme(_n, current):
     return "dark" if current == "light" else "light"
 
 
@@ -721,15 +751,8 @@ def render_tab(tab, stadt, theme):
     d   = DATEN[stadt]
     cfg = STAEDTE[stadt]
     t   = THEMES[theme]
-    sc  = cfg["strahlung_colorscale"]
-
     monthly          = d["monthly"]
     jaehrlich        = d["jaehrlich"]
-    monatsmittel     = d["monatsmittel"]
-    temp_monatlich   = d["temp_monatlich"]
-    temp_mittel      = d["temp_mittel"]
-    precip_monatlich = d["precip_monatlich"]
-    precip_mittel    = d["precip_mittel"]
     temp_jaehrlich   = d["temp_jaehrlich"]
     precip_jaehrlich = d["precip_jaehrlich"]
 

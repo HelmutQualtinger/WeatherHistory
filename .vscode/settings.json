@@ -1,3 +1,5 @@
 {
-    "python-envs.defaultEnvManager": "ms-python.python:venv"
+    "python-envs.defaultEnvManager": "ms-python.python:venv",
+    "python.defaultInterpreterPath": "/Users/haraldbeker/.venv/bin/python",
+    "python.analysis.extraPaths": ["/Users/haraldbeker/.venv/lib/python3.13/site-packages"]
 }
