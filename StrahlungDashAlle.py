@@ -298,6 +298,18 @@ STAEDTE = {
         "temp_hot_threshold":      30,
         "temp_colors":             ["#f39c12", "#e74c3c", "#7b241c"],
     },
+    "Kuala Lumpur": {
+        "filename":                "csv/kualalumpur_wetter_vollständig_03_2026.csv",
+        "h1_color_light":          "#0e6655",
+        "h1_color_dark":           "#76d7c4",
+        "strahlung_colorscale":    "YlGn",
+        "bar_voll_color":          "#148f77",
+        "bar_aktuell_color":       "#76d7c4",
+        "precip_color":            "#1a5276",
+        "temp_cold_threshold":     25,
+        "temp_hot_threshold":      33,
+        "temp_colors":             ["#f39c12", "#e74c3c", "#7b241c"],
+    },
 }
 
 # Recommendation: Merge KOORDINATEN and KONTINENTE logic into the STAEDTE dict 
@@ -380,7 +392,7 @@ app.title = "Wetterdaten – Städtevergleich"
 KONTINENTE = {
     "Europa":      ["Wien", "Rom", "Lissabon", "Oslo", "Dublin"],
     "Afrika":      ["Casablanca", "Lagos", "Nairobi", "Kapstadt"],
-    "Asien":       ["Medina", "Mumbai", "Shanghai", "Tokyo", "Yakutsk"],
+    "Asien":       ["Medina", "Mumbai", "Shanghai", "Tokyo", "Yakutsk", "Kuala Lumpur"],
     "Nordamerika": ["Las Vegas", "Los Angeles", "New York"],
     "Südamerika":  ["Santiago", "Rio"],
     "Ozeanien":    ["Canberra", "Wellington"],
@@ -408,6 +420,7 @@ KOORDINATEN = {
     "Nairobi":     (-1.2921,   36.8219),
     "Kapstadt":    (-33.9249,  18.4241),
     "Rio":         (-22.9068, -43.1729),
+    "Kuala Lumpur": (3.1390,  101.6869),
 }
 
 kontinent_optionen = [{"label": k, "value": k} for k in KONTINENTE]

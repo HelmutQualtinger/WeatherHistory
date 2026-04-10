@@ -43,12 +43,13 @@ STAEDTE = {
     "Wellington":  {"filename":"csv/wellington_wetter_vollständig_03_2026.csv","h1_color_light":"#154360","h1_color_dark":"#7fb3d3","strahlung_colorscale":"Blues","bar_voll_color":"#1f618d","bar_aktuell_color":"#7fb3d3","precip_color":"#154360","temp_cold_threshold":8,"temp_hot_threshold":20,"temp_colors":["#3498db","#27ae60","#f39c12"]},
     "Kapstadt":    {"filename":"csv/kapstadt_wetter_vollständig_03_2026.csv","h1_color_light":"#6c3483","h1_color_dark":"#c39bd3","strahlung_colorscale":"Purples","bar_voll_color":"#8e44ad","bar_aktuell_color":"#c39bd3","precip_color":"#5b2c6f","temp_cold_threshold":12,"temp_hot_threshold":25,"temp_colors":["#3498db","#f39c12","#e74c3c"]},
     "Rio":         {"filename":"csv/rio_wetter_vollständig_03_2026.csv","h1_color_light":"#1d6a2e","h1_color_dark":"#58d68d","strahlung_colorscale":"YlGn","bar_voll_color":"#27ae60","bar_aktuell_color":"#a9dfbf","precip_color":"#1a5276","temp_cold_threshold":20,"temp_hot_threshold":30,"temp_colors":["#f39c12","#e74c3c","#7b241c"]},
+    "Kuala Lumpur":{"filename":"csv/kualalumpur_wetter_vollständig_03_2026.csv","h1_color_light":"#0e6655","h1_color_dark":"#76d7c4","strahlung_colorscale":"YlGn","bar_voll_color":"#148f77","bar_aktuell_color":"#76d7c4","precip_color":"#1a5276","temp_cold_threshold":25,"temp_hot_threshold":33,"temp_colors":["#f39c12","#e74c3c","#7b241c"]},
 }
 
 KONTINENTE = {
     "Europa":      ["Wien","Rom","Lissabon","Oslo","Dublin"],
     "Afrika":      ["Casablanca","Lagos","Nairobi","Kapstadt"],
-    "Asien":       ["Medina","Mumbai","Shanghai","Tokyo","Yakutsk"],
+    "Asien":       ["Medina","Mumbai","Shanghai","Tokyo","Yakutsk","Kuala Lumpur"],
     "Nordamerika": ["Las Vegas","Los Angeles","New York"],
     "Südamerika":  ["Santiago","Rio"],
     "Ozeanien":    ["Canberra","Wellington"],
@@ -62,6 +63,7 @@ KOORDINATEN = {
     "Mumbai":(19.0760,72.8777),"Dublin":(53.3498,-6.2603),"Canberra":(-35.2809,149.1300),
     "Wellington":(-41.2866,174.7756),"Yakutsk":(62.0355,129.6755),"Lagos":(6.5244,3.3792),
     "Nairobi":(-1.2921,36.8219),"Kapstadt":(-33.9249,18.4241),"Rio":(-22.9068,-43.1729),
+    "Kuala Lumpur":(3.1390,101.6869),
 }
 
 MONAT_NAMEN_LIST = [MONATSNAMEN[i] for i in range(1, 13)]
@@ -165,6 +167,32 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wetter-Dashboard – Weltweiter Vergleich</title>
+
+<!-- SEO -->
+<meta name="description" content="Interaktives Wetter-Dashboard für weltweiten Klimavergleich: Solarstrahlung, Temperatur, Niederschlag, Luftfeuchtigkeit und Luftdruck für über 20 Städte auf allen Kontinenten.">
+<meta name="keywords" content="Wetter, Klima, Dashboard, Solarstrahlung, Temperatur, Niederschlag, Weltweiter Vergleich, Klimadaten, Wien, Tokyo, New York, Mumbai, Lagos, Santiago">
+<meta name="author" content="Harald Beker">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://helmutqualtinger.github.io/WeatherHistory/dashboard.html">
+
+<!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wetter-Dashboard – Weltweiter Klimavergleich">
+<meta property="og:description" content="Interaktives Wetter-Dashboard für weltweiten Klimavergleich: Solarstrahlung, Temperatur, Niederschlag und mehr für über 20 Städte auf allen Kontinenten.">
+<meta property="og:url" content="https://helmutqualtinger.github.io/WeatherHistory/dashboard.html">
+<meta property="og:image" content="https://helmutqualtinger.github.io/WeatherHistory/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Wetter-Dashboard mit Weltkarte und Klimadiagrammen">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="WeatherHistory">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wetter-Dashboard – Weltweiter Klimavergleich">
+<meta name="twitter:description" content="Interaktives Wetter-Dashboard für weltweiten Klimavergleich: Solarstrahlung, Temperatur, Niederschlag und mehr für über 20 Städte.">
+<meta name="twitter:image" content="https://helmutqualtinger.github.io/WeatherHistory/preview.png">
+<meta name="twitter:image:alt" content="Wetter-Dashboard mit Weltkarte und Klimadiagrammen">
 <script src="https://cdn.plot.ly/plotly-2.32.0.min.js" charset="utf-8"></script>
 <style>
   /* ── Reset & base ─────────────────────────────────────────── */
@@ -797,6 +825,13 @@ function renderMap() {
     dragmode:false,
   };
   Plotly.react('world-map', traces, layout, { responsive:true, displayModeBar:false, scrollZoom:false });
+
+  // Map click — must be wired AFTER Plotly renders the map element
+  document.getElementById('world-map').on('plotly_click', function(data) {
+    if (!data || !data.points || !data.points.length) return;
+    const city = data.points[0].text;
+    selectCity(city);
+  });
 }
 
 // ============================================================
@@ -926,13 +961,6 @@ document.getElementById('sel-jahr').addEventListener('change', function() {
 document.getElementById('theme-toggle').addEventListener('click', function() {
   isDark = !isDark;
   applyTheme();
-});
-
-// Map click
-document.getElementById('world-map').on('plotly_click', function(data) {
-  if (!data || !data.points || !data.points.length) return;
-  const city = data.points[0].text;
-  selectCity(city);
 });
 
 // ============================================================
