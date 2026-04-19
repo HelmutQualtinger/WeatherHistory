@@ -44,12 +44,16 @@ STAEDTE = {
     "Kapstadt":    {"filename":"csv/kapstadt_wetter_vollständig_03_2026.csv","h1_color_light":"#6c3483","h1_color_dark":"#c39bd3","strahlung_colorscale":"Purples","bar_voll_color":"#8e44ad","bar_aktuell_color":"#c39bd3","precip_color":"#5b2c6f","temp_cold_threshold":12,"temp_hot_threshold":25,"temp_colors":["#3498db","#f39c12","#e74c3c"]},
     "Rio":         {"filename":"csv/rio_wetter_vollständig_03_2026.csv","h1_color_light":"#1d6a2e","h1_color_dark":"#58d68d","strahlung_colorscale":"YlGn","bar_voll_color":"#27ae60","bar_aktuell_color":"#a9dfbf","precip_color":"#1a5276","temp_cold_threshold":20,"temp_hot_threshold":30,"temp_colors":["#f39c12","#e74c3c","#7b241c"]},
     "Kuala Lumpur":{"filename":"csv/kualalumpur_wetter_vollständig_03_2026.csv","h1_color_light":"#0e6655","h1_color_dark":"#76d7c4","strahlung_colorscale":"YlGn","bar_voll_color":"#148f77","bar_aktuell_color":"#76d7c4","precip_color":"#1a5276","temp_cold_threshold":25,"temp_hot_threshold":33,"temp_colors":["#f39c12","#e74c3c","#7b241c"]},
+    "London":      {"filename":"csv/london_wetter_vollständig_03_2026.csv","h1_color_light":"#1a3a5c","h1_color_dark":"#aed6f1","strahlung_colorscale":"Blues","bar_voll_color":"#2471a3","bar_aktuell_color":"#85c1e9","precip_color":"#1a3a5c","temp_cold_threshold":5,"temp_hot_threshold":20,"temp_colors":["#3498db","#f39c12","#e74c3c"]},
+    "Paris":       {"filename":"csv/paris_wetter_vollständig_03_2026.csv","h1_color_light":"#7b241c","h1_color_dark":"#f1948a","strahlung_colorscale":"Reds","bar_voll_color":"#c0392b","bar_aktuell_color":"#f1948a","precip_color":"#7b241c","temp_cold_threshold":5,"temp_hot_threshold":22,"temp_colors":["#3498db","#f39c12","#e74c3c"]},
+    "Moskau":      {"filename":"csv/moscow_wetter_vollständig_03_2026.csv","h1_color_light":"#1a3a5c","h1_color_dark":"#aed6f1","strahlung_colorscale":"Blues","bar_voll_color":"#2471a3","bar_aktuell_color":"#aed6f1","precip_color":"#1a3a5c","temp_cold_threshold":-10,"temp_hot_threshold":18,"temp_colors":["#3498db","#f39c12","#e74c3c"]},
+    "Wladiwostok": {"filename":"csv/wladiwostok_wetter_vollständig_03_2026.csv","h1_color_light":"#1a3a5c","h1_color_dark":"#aed6f1","strahlung_colorscale":"Blues","bar_voll_color":"#2471a3","bar_aktuell_color":"#aed6f1","precip_color":"#1a3a5c","temp_cold_threshold":-10,"temp_hot_threshold":20,"temp_colors":["#3498db","#f39c12","#e74c3c"]},
 }
 
 KONTINENTE = {
-    "Europa":      ["Wien","Rom","Lissabon","Oslo","Dublin"],
+    "Europa":      ["Wien","Rom","Lissabon","Oslo","Dublin","London","Paris","Moskau"],
     "Afrika":      ["Casablanca","Lagos","Nairobi","Kapstadt"],
-    "Asien":       ["Medina","Mumbai","Shanghai","Tokyo","Yakutsk","Kuala Lumpur"],
+    "Asien":       ["Medina","Mumbai","Shanghai","Tokyo","Yakutsk","Kuala Lumpur","Wladiwostok"],
     "Nordamerika": ["Las Vegas","Los Angeles","New York"],
     "Südamerika":  ["Santiago","Rio"],
     "Ozeanien":    ["Canberra","Wellington"],
@@ -64,6 +68,10 @@ KOORDINATEN = {
     "Wellington":(-41.2866,174.7756),"Yakutsk":(62.0355,129.6755),"Lagos":(6.5244,3.3792),
     "Nairobi":(-1.2921,36.8219),"Kapstadt":(-33.9249,18.4241),"Rio":(-22.9068,-43.1729),
     "Kuala Lumpur":(3.1390,101.6869),
+    "London":      (51.5074,  -0.1278),
+    "Paris":       (48.8566,   2.3522),
+    "Moskau":      (55.7558,  37.6176),
+    "Wladiwostok": (43.1155, 131.8855),
 }
 
 MONAT_NAMEN_LIST = [MONATSNAMEN[i] for i in range(1, 13)]
